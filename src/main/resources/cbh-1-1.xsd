@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="CHTR">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="RBIF"/>
+		<xs:element ref="CBIFs"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>	
+  <xs:element name="RBIF">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="RICD"/>
+        <xs:element ref="TSBN"/>
+        <xs:element ref="MIRS"/>
+      </xs:sequence>
+    </xs:complexType>
+   </xs:element>	
+   
+  <xs:element name="RICD">
+	<xs:simpleType>
+		<xs:restriction base="xs:string">
+			<xs:length value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+  </xs:element>
+  <xs:element name="TSBN">
+	<xs:simpleType>
+		<xs:restriction base="xs:string">
+            <xs:maxLength value="4"/>
+			<xs:minLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+  </xs:element>
+  <xs:element name="MIRS">
+	<xs:simpleType>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4"/>
+			<xs:minLength value="2"/>
+		</xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  
+  <xs:element name="CBIFs">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="CBIF"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="CBIF">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="OCNM"/>
+      </xs:sequence>
+      <xs:attribute name="seqno" use="required" type="xs:integer"/>
+    </xs:complexType>
+	</xs:element>
+	
+	<xs:element name="OCNM">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:length value="4"/>
+			</xs:restriction>
+		</xs:simpleType>
+    </xs:element>
+  
+   
+</xs:schema>
