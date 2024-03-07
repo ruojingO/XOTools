@@ -12,7 +12,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 # Set up the proxy
 #socks.set_default_proxy(socks.SOCKS5, "127.0.0.1", 10808)
 
-   # Configure the HTTP proxy
+   # Configure the HTTP proxy !! very important
 os.environ['HTTP_PROXY'] = 'http://127.0.0.1:10809'
 os.environ['HTTPS_PROXY'] = 'http://127.0.0.1:10809'
 

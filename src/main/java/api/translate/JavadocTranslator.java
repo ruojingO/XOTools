@@ -12,6 +12,7 @@ public class JavadocTranslator {
     public static void main(String[] args) throws IOException, InterruptedException {
         String filePath = "C:\\Users\\ruoji\\Desktop\\tempWorkspace\\Object.java";
         coreTrans(new File(filePath));
+
     }
 
     public static void coreTrans(File file) throws IOException, InterruptedException {

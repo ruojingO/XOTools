@@ -14,6 +14,8 @@ public class PythonExecutor {
         processBuilder.redirectErrorStream(true);
         // Set the API key environment variable
         Map<String, String> env = processBuilder.environment();
+
+        //todo from env get
         env.put("GOOGLE_GENAI_API_KEY", "AIzaSyDUfmAheoLC2iG6Mw3snhi_hXFwmq7aA4I");
         String completeString = "";
         try {
@@ -52,7 +54,6 @@ public class PythonExecutor {
     private static boolean isTransFailed(String completeString) {
         return completeString.contains("Traceback (most recent call last):");
     }
-
 
     public static String escapeDoubleQuotes(String input) {
         return input.replace("\"", "\\\"");
