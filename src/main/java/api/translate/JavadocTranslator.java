@@ -22,7 +22,6 @@ public class JavadocTranslator {
         Pattern javadocPattern = Pattern.compile("/\\*\\*.*?\\*/", Pattern.DOTALL);
         Matcher javadocMatcher = javadocPattern.matcher(fileContent);
 
-        // StringBuilder to hold the new file content
         StringBuilder newFileContent = new StringBuilder(fileContent);
 
         // Offset to keep track of replacements within the StringBuilder

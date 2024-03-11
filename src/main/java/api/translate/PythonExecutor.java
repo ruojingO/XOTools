@@ -12,7 +12,6 @@ public class PythonExecutor {
         String pythonScriptPath = "C:/Users/ruoji/Desktop/XWorkSpace/devWorkspace.Backup/XOTools/src/main/java/api/translate/transE.py";
         ProcessBuilder processBuilder = new ProcessBuilder("python", pythonScriptPath, transE);
         processBuilder.redirectErrorStream(true);
-        // Set the API key environment variable
         Map<String, String> env = processBuilder.environment();
 
         //todo from env get
