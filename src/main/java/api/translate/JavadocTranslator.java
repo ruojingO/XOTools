@@ -98,7 +98,7 @@ public class JavadocTranslator {
 
     /**
      * Extracts the core content from a Javadoc comment block.
-     * E.g., "/** Hello world " becomes "Hello world".
+     * E.g., "/** Hello world */" becomes "Hello world".
      * This is a simplified version and might need refinement for complex Javadoc structures.
      */
     private String extractJavadocContent(String javadocComment) {

@@ -4,6 +4,7 @@ import com.unfbx.chatgpt.OpenAiClient;
 import com.unfbx.chatgpt.entity.chat.ChatCompletion;
 import com.unfbx.chatgpt.entity.chat.ChatCompletionResponse;
 import com.unfbx.chatgpt.entity.chat.Message;
+import com.unfbx.chatgpt.entity.chat.ChatCompletion.Model; // Correct import for Model
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
