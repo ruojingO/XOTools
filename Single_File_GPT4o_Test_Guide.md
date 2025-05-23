@@ -11,28 +11,49 @@ This guide explains how to test the Javadoc translation functionality using the 
 
 ## Steps for Testing
 
-### 1. Set the `OPENAI_API_KEY` Environment Variable
+### 1. Set Environment Variables
 
-The `GPT4oTranslator` service reads the API key from an environment variable named `OPENAI_API_KEY`. You need to set this variable in your testing environment.
+#### a. `OPENAI_API_KEY` (Mandatory)
+
+The `GPT4oTranslator` service reads the API key from an environment variable named `OPENAI_API_KEY`.
 
 *   **Linux/macOS:**
     ```bash
     export OPENAI_API_KEY="your_actual_api_key_here"
     ```
-    To make it permanent for the current session, you can add this line to your shell's configuration file (e.g., `~/.bashrc`, `~/.zshrc`) and then source it (e.g., `source ~/.bashrc`).
-
 *   **Windows (Command Prompt):**
     ```cmd
     set OPENAI_API_KEY=your_actual_api_key_here
     ```
-    To set it for the current session only. For a more permanent solution, you can set it through the System Properties > Environment Variables dialog.
-
 *   **Windows (PowerShell):**
     ```powershell
     $Env:OPENAI_API_KEY = "your_actual_api_key_here"
     ```
+**Important:** Replace `"your_actual_api_key_here"` with your actual OpenAI API key.
 
-**Important:** Replace `"your_actual_api_key_here"` with your actual OpenAI API key. Keep your API key confidential.
+#### b. Proxy Configuration (Optional, if needed)
+
+If your environment requires an HTTP proxy to access the OpenAI API, you must also set the following environment variables. If not set, the application will attempt to connect directly.
+
+*   `OPENAI_PROXY_HOST`: Your proxy server's hostname or IP address.
+*   `OPENAI_PROXY_PORT`: Your proxy server's port number.
+
+*   **Linux/macOS:**
+    ```bash
+    export OPENAI_PROXY_HOST="your_proxy_host"
+    export OPENAI_PROXY_PORT="your_proxy_port"
+    ```
+*   **Windows (Command Prompt):**
+    ```cmd
+    set OPENAI_PROXY_HOST=your_proxy_host
+    set OPENAI_PROXY_PORT=your_proxy_port
+    ```
+*   **Windows (PowerShell):**
+    ```powershell
+    $Env:OPENAI_PROXY_HOST = "your_proxy_host"
+    $Env:OPENAI_PROXY_PORT = "your_proxy_port"
+    ```
+Replace `your_proxy_host` and `your_proxy_port` with your actual proxy details (e.g., `127.0.0.1` and `1080`).
 
 ### 2. Prepare a Sample Java File
 
@@ -127,6 +148,7 @@ The `pom.xml` for XOTools should include an SLF4J binding like `slf4j-simple` to
     *   Check logs for errors.
     *   Verify the Javadoc comments are long enough (current `MIN_JAVADOC_LENGTH_FOR_TRANSLATION` in `JavadocTranslator.java` is 20 characters).
     *   Ensure the `processingMode` is `all`.
-*   **Firewall/Proxy Issues:** If you are behind a corporate firewall or need a proxy to access the internet, the `GPT4oTranslator` (and underlying OkHttpClient used by `chatgpt-java` SDK) might need proxy configuration. The SDK allows providing a custom `OkHttpClient` where a proxy can be set. Refer to the `chatgpt-java` SDK documentation for details on custom `OkHttpClient` configuration if needed.
+*   **Connection Timeout / Network Issues:** If you are using the GPT-4o translator and require a proxy to access external services, ensure you have set the `OPENAI_PROXY_HOST` and `OPENAI_PROXY_PORT` environment variables correctly. Check logs for messages about proxy configuration. If a proxy is not needed, ensure your network allows direct access to OpenAI APIs.
+*   **Firewall/Proxy Issues (Old Note, now covered by environment variables):** The `GPT4oTranslator` now directly supports proxy configuration via `OPENAI_PROXY_HOST` and `OPENAI_PROXY_PORT` environment variables. The previous note about manually configuring a custom OkHttpClient for the SDK is less relevant unless more advanced OkHttpClient customization (beyond proxy settings) is required.
 
 This guide should help you perform a basic integration test of the GPT-4o translation feature.Now, I'll check the `pom.xml` for an SLF4J binding.
