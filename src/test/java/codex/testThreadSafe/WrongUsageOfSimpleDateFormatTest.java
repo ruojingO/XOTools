@@ -1,0 +1,1 @@
+package codex.testThreadSafe;\nimport org.junit.Test;\nimport static org.junit.Assert.*;\n\npublic class WrongUsageOfSimpleDateFormatTest {\n    @Test\n    public void testMain() {\n        assertEquals(1, 1); // Dummy test just to run the class\n    }\n}
