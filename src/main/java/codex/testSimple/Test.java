@@ -1,3 +1,5 @@
+package codex.testSimple;
+
 import java.text.SimpleDateFormat;
 
 public class Test {

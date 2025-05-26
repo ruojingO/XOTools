@@ -1,4 +1,4 @@
-import java.text.SimpleDateFormat;
+package codex.testSimple;
 
 public class TestOriginal {
     public static void main(String[] args) {
