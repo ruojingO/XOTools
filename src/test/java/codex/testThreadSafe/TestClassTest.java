@@ -1,1 +1,1 @@
-package codex.testThreadSafe;\nimport org.junit.Test;\nimport static org.junit.Assert.*;\n\npublic class TestClassTest {\n    @Test\n    public void testMain() {\n        // Dummy test just to ensure that the setup is correct\n        assertTrue(true);\n    }\n}
+package codex.testThreadSafe;\nimport org.junit.Test;\nimport static org.junit.Assert.*;\n\npublic class TestClassTest {\n    @Test\n    public void testMain() {\n        // Dummy test just to ensure setup is correct\n        assertTrue(true);\n    }\n}
