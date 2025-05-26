@@ -42,11 +42,16 @@ XOTools is a Maven project. Ensure Maven is installed to build and manage depend
     *   Proxy settings for Python HTTP/HTTPS traffic are also hardcoded in `transE.py`.
 
 *   **GPT-4o Translator (`gpt4o` option):**
-    *   Requires a valid OpenAI API key.
-    *   This key must be set as an environment variable named `OPENAI_API_KEY`.
-        *   Example (Linux/macOS): `export OPENAI_API_KEY="your_openai_api_key"`
-        *   Example (Windows CMD): `set OPENAI_API_KEY=your_openai_api_key`
-        *   Example (Windows PowerShell): `$Env:OPENAI_API_KEY = "your_openai_api_key"`
+        *   Requires a valid OpenAI API key.
+        *   This key must be set as an environment variable named `OPENAI_API_KEY`.
+            *   Example (Linux/macOS): `export OPENAI_API_KEY="your_openai_api_key"`
+            *   Example (Windows CMD): `set OPENAI_API_KEY=your_openai_api_key`
+            *   Example (Windows PowerShell): `$Env:OPENAI_API_KEY = "your_openai_api_key"`
+        *   **Optional Proxy Configuration (if needed):**
+            If your environment requires an HTTP proxy to access the OpenAI API, you can configure it using the following environment variables:
+            *   `OPENAI_PROXY_HOST`: Your proxy server's hostname or IP address (e.g., `127.0.0.1`, `proxy.example.com`).
+            *   `OPENAI_PROXY_PORT`: Your proxy server's port number (e.g., `1080`, `8080`).
+            The application will automatically use these settings to route API requests through the specified proxy. If these variables are not set, or if the port is invalid, the application will attempt to connect directly.
 
 ## How to Build
 

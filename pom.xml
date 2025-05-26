@@ -332,6 +332,13 @@
 			<scope>runtime</scope> <!-- Or 'test' if only for tests -->
 		</dependency>
 
+		<!-- Flexmark for Markdown processing -->
+		<dependency>
+			<groupId>com.vladsch.flexmark</groupId>
+			<artifactId>flexmark-all</artifactId>
+			<version>0.64.8</version>
+		</dependency>
+
 
 	</dependencies>
 

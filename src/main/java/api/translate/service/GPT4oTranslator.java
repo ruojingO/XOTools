@@ -4,19 +4,23 @@ import com.unfbx.chatgpt.OpenAiClient;
 import com.unfbx.chatgpt.entity.chat.ChatCompletion;
 import com.unfbx.chatgpt.entity.chat.ChatCompletionResponse;
 import com.unfbx.chatgpt.entity.chat.Message;
-import com.unfbx.chatgpt.entity.chat.ChatCompletion.Model; // Correct import for Model
+// import com.unfbx.chatgpt.entity.chat.ChatCompletion.Model; // Model is now referenced by string
+import okhttp3.OkHttpClient; // For proxy configuration
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class GPT4oTranslator implements TranslationService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GPT4oTranslator.class);
     private final OpenAiClient openAiClient;
-    private static final String GPT_4_O_MODEL_NAME = "gpt-4o"; // Use string as Model.GPT_4_O might not exist
+    private static final String GPT_4_O_MODEL_NAME = "gpt-4o";
 
     public GPT4oTranslator() {
         String apiKey = System.getenv("OPENAI_API_KEY");
@@ -24,14 +28,41 @@ public class GPT4oTranslator implements TranslationService {
             LOGGER.error("OPENAI_API_KEY environment variable is not set.");
             throw new IllegalStateException("OPENAI_API_KEY environment variable is not set.");
         }
-        // The SDK expects a list of API keys.
         List<String> apiKeys = Arrays.asList(apiKey);
-        this.openAiClient = OpenAiClient.builder()
-                .apiKey(apiKeys)
-                // .keyStrategy(new FirstKeyStrategy()) // Optional: if multiple keys were provided
-                // .apiHost("https://your-proxy.com/") // Optional: if using a proxy
-                .build();
-        LOGGER.info("GPT4oTranslator initialized successfully.");
+
+        String proxyHost = System.getenv("OPENAI_PROXY_HOST");
+        String proxyPortStr = System.getenv("OPENAI_PROXY_PORT");
+        
+        OpenAiClient.Builder clientBuilder = OpenAiClient.builder().apiKey(apiKeys);
+
+        if (proxyHost != null && !proxyHost.isEmpty() && proxyPortStr != null && !proxyPortStr.isEmpty()) {
+            LOGGER.info("Found proxy settings: OPENAI_PROXY_HOST='{}', OPENAI_PROXY_PORT='{}'", proxyHost, proxyPortStr);
+            try {
+                int proxyPort = Integer.parseInt(proxyPortStr);
+                if (proxyPort > 0 && proxyPort <= 65535) {
+                    OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();
+                    Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(proxyHost, proxyPort));
+                    okHttpClientBuilder.proxy(proxy);
+                    // It's good practice to set timeouts for the client
+                    okHttpClientBuilder.connectTimeout(30, TimeUnit.SECONDS);
+                    okHttpClientBuilder.writeTimeout(30, TimeUnit.SECONDS);
+                    okHttpClientBuilder.readTimeout(30, TimeUnit.SECONDS);
+                    
+                    OkHttpClient customOkHttpClient = okHttpClientBuilder.build();
+                    clientBuilder.okHttpClient(customOkHttpClient);
+                    LOGGER.info("Proxy configured for host {} and port {}", proxyHost, proxyPort);
+                } else {
+                    LOGGER.warn("Invalid proxy port number: {}. Must be between 1 and 65535. Proceeding without proxy.", proxyPortStr);
+                }
+            } catch (NumberFormatException e) {
+                LOGGER.warn("Invalid proxy port format: '{}'. Must be an integer. Proceeding without proxy.", proxyPortStr, e);
+            }
+        } else {
+            LOGGER.info("No proxy settings (OPENAI_PROXY_HOST, OPENAI_PROXY_PORT) found or one is missing. Proceeding without custom proxy.");
+        }
+        
+        this.openAiClient = clientBuilder.build();
+        LOGGER.info("GPT4oTranslator initialized successfully (proxy status logged above).");
     }
 
     @Override
