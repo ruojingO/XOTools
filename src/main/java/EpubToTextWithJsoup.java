@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -21,8 +22,7 @@ import org.jsoup.nodes.Document;
  * 此类提供使用Jsoup库将EPUB文件转换为纯文本的功能。
  */
 public class EpubToTextWithJsoup {
-    private java.util.Calendar c = java.util.Calendar.getInstance();
-
+    private static SimpleDateFormat sf= new SimpleDateFormat();
     /**
      * 读取文件长度
      */
@@ -44,8 +44,8 @@ public class EpubToTextWithJsoup {
      */
     public static void main(String[] args) throws IOException {
         List<String> ll = new ArrayList<>();
-        String epubFilePath = "C:\\Users\\ruoji\\Desktop\\S.epub";
-        String outputFilePath = "C:\\Users\\ruoji\\Documents\\BaiduSyncdisk\\XDhamma\\original\\B.sumana.txt";
+        String epubFilePath = "C:\\Users\\ruoji\\OneDrive\\Desktop\\S.epub";
+        String outputFilePath = "C:\\Users\\ruoji\\OneDrive\\Desktop\\B.sumana.txt";
         File epubFile = new File(epubFilePath);
         File tempDirectory = new File("C:\\temp\\epubTemp");
 
