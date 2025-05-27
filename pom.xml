@@ -35,14 +35,14 @@
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
-			<version>1.14.3</version>
+			<version>1.17.2</version>
 		</dependency>
 
 		<!-- SLF4J API for logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.32</version> <!-- Or a newer compatible version -->
+			<version>2.0.12</version> <!-- Or a newer compatible version -->
 		</dependency>
 		<!-- Basic SLF4J binding (e.g., slf4j-simple or Logback) - chatgpt-java might bring one -->
 
@@ -71,28 +71,27 @@
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.14.0</version>
+			<version>2.16.1</version>
 		</dependency>
 
 		<!-- Apache Commons Lang -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.12.0</version> <!-- Or a newer compatible version -->
+			<version>3.14.0</version> <!-- Or a newer compatible version -->
 		</dependency>
 	
 		<!-- https://mvnrepository.com/artifact/org.apache.tika/tika-parsers -->
 		<dependency>
 			<groupId>org.apache.tika</groupId>
 			<artifactId>tika-parsers</artifactId>
-			<version>2.9.1</version>
-			<type>pom</type>
+			<version>2.9.2</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.tika/tika-core -->
 		<dependency>
 			<groupId>org.apache.tika</groupId>
 			<artifactId>tika-core</artifactId>
-			<version>2.9.1</version>
+			<version>2.9.2</version>
 		</dependency>
 
 		<!--
@@ -100,46 +99,16 @@
 		<dependency>
 			<groupId>org.apache.tika</groupId>
 			<artifactId>tika-parser-text-module</artifactId>
-			<version>2.9.1</version>
+			<version>2.9.2</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
-			<version>5.2.5</version>
+			<version>5.3.0</version>
 		</dependency>
  
-
-		<!-- https://mvnrepository.com/artifact/org.apache.tika/tika-parsers -->
-		<dependency>
-			<groupId>org.apache.tika</groupId>
-			<artifactId>tika-parsers</artifactId>
-			<version>2.9.1</version>
-			<type>pom</type>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.apache.tika/tika-core -->
-		<dependency>
-			<groupId>org.apache.tika</groupId>
-			<artifactId>tika-core</artifactId>
-			<version>2.9.1</version>
-		</dependency>
-
-		<!--
-		https://mvnrepository.com/artifact/org.apache.tika/tika-parser-text-module -->
-		<dependency>
-			<groupId>org.apache.tika</groupId>
-			<artifactId>tika-parser-text-module</artifactId>
-			<version>2.9.1</version>
-		</dependency>
-
-
-		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>5.2.5</version>
-		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -150,14 +119,14 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>32.1.3-jre</version>
+			<version>33.2.1-jre</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
-			<version>3.5.14</version>
+			<version>3.5.16</version>
 		</dependency>
 
 			<dependency>
@@ -268,24 +237,7 @@
                     <version>4.1.1</version>
                 </dependency>
 
-                <dependency>
-                    <groupId>xerces</groupId>
-                    <artifactId>xercesImpl</artifactId>
-                    <version>2.12.0</version>
-                </dependency>
-
-                <dependency>
-                    <groupId>xerces</groupId>
-                    <artifactId>xercesImpl</artifactId>
-                    <version>2.12.0</version>
-                </dependency>
-
-                <dependency>
-                    <groupId>org.jsoup</groupId>
-                    <artifactId>jsoup</artifactId>
-                    <version>1.12.1</version>
-                </dependency>
-
+                <!-- Removed duplicate xercesImpl and jsoup dependencies -->
                 <dependency>
                     <groupId>cn.hutool</groupId>
                     <artifactId>hutool-all</artifactId>
@@ -328,7 +280,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-simple</artifactId>
-			<version>1.7.32</version>
+			<version>2.0.12</version>
 			<scope>runtime</scope> <!-- Or 'test' if only for tests -->
 		</dependency>
 
