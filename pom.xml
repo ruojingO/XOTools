@@ -176,11 +176,11 @@
             <version>5.1.30</version>
             </dependency>
 
-        <dependency>
+        <!--dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
             <version>3.5.11-dbr</version>
-            </dependency>
+            </dependency-->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
@@ -441,6 +441,44 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
             </plugin>
+			
+			 <plugin>
+        <groupId>org.owasp</groupId>
+        <artifactId>dependency-check-maven</artifactId>
+        <version>12.1.1</version> <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <failBuildOnCVSS>7</failBuildOnCVSS>
+          <enableExperimental>false</enableExperimental>
+         
+		    <disableRetireJS>true</disableRetireJS>
+          <outputDirectory>${project.build.directory}/dependency-check-reports</outputDirectory>
+          <formats>
+            <format>json</format>
+            <format>html</format>
+          </formats>
+          </configuration>
+      </plugin>
+	  
+	  <plugin>
+  <groupId>org.codehaus.mojo</groupId>
+  <artifactId>versions-maven-plugin</artifactId>
+  <version>2.16.2</version>
+  
+  <configuration>
+	  <allowSnapshots>false</allowSnapshots>
+	  <allowMajorUpdates>false</allowMajorUpdates>
+	  <includeNextSnapshots>false</includeNextSnapshots>
+	  <includeNextReleases>true</includeNextReleases>
+	  <includeNextDevelopmentVersions>false</includeNextDevelopmentVersions>
+</configuration>
+</plugin>
+
         </plugins>
     </build>
 
