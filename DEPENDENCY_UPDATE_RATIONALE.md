@@ -4,8 +4,8 @@ This document outlines the reasons for updating specific dependencies in the `po
 
 ## Property Updates
 
-1.  **`springframework.version`**: Updated from `5.3.36` to `5.3.38`
-    *   **Rationale**: To incorporate the latest bug fixes, security patches, and minor improvements within the Spring Framework 5.3.x line. Staying updated helps protect against vulnerabilities like those related to request handling, expression language, or other core components. Version `5.3.38` is a recent stable release.
+1.  **`springframework.version`**: Updated from `5.3.36` to `5.3.39`
+    *   **Rationale**: To incorporate the latest bug fixes, security patches, and minor improvements within the Spring Framework 5.3.x line. Staying updated helps protect against vulnerabilities like those related to request handling, expression language, or other core components. Version `5.3.39` is the latest stable patch release in this line, ensuring all known fixes for this series are applied.
 
 2.  **`log4j.version`**: Updated from `2.17.1` to `2.23.1`
     *   **Rationale**: Critical. Log4j 2.x versions prior to `2.17.2` (for Java 8) had several critical remote code execution (RCE) vulnerabilities (e.g., Log4Shell - CVE-2021-44228, CVE-2021-45046, CVE-2021-45105, CVE-2021-44832). While `2.17.1` addressed the most critical ones, `2.23.1` is the latest version for Java 8 users, providing the most comprehensive set of fixes for these and any subsequent vulnerabilities, along with other bug fixes and improvements.
