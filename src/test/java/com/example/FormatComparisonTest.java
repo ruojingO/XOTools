@@ -130,7 +130,7 @@ public class FormatComparisonTest {
         Examples.refactLog1(true, "PART-001");
         Examples.refactLog2("PATTERN-X", "V1", "V2");
         assertEquals(2, refAppender.list.size());
-        assertEquals("externalData tag has been spotted",
+        assertEquals("externalData tag has been spotted PART-001",
                 refAppender.list.get(0).getFormattedMessage());
         assertEquals("trigger pattern: PATTERN-X, illegal danger initParam: V1, sanitizered param: V2",
                 refAppender.list.get(1).getFormattedMessage());
