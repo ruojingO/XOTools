@@ -1,2 +1,0 @@
-Error: Division by zero is not allowed.
-Current date format: 2025-05-26
