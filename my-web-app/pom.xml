@@ -1,0 +1,80 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>my-web-app</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <name>My WebApp for ClassLoader Demo</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <failOnMissingWebXml>false</failOnMissingWebXml> <!-- Handles modern servlet spec without web.xml if not strictly needed -->
+    </properties>
+
+    <dependencies>
+        <!-- Servlet API: scope provided because the server (Tomcat) will provide this -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Dependency on the shared-util project.
+             In a real multi-module Maven project, this would be:
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>shared-util</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+             However, for this conceptual example, we assume shared-util.jar
+             will be manually placed in Tomcat's lib.
+             So, this dependency is more for compilation if SharedUtil was in the same project
+             or a local repository. For the described Tomcat scenario (shared-util in tomcat/lib),
+             this compile-time dependency isn't strictly what makes it work at runtime,
+             but it's needed for `javac` to find `com.example.common.SharedUtil`.
+             Let's assume for now `SharedUtil.java` is also copied into this project's source
+             or manually compiled and made available for `my-web-app` to compile against it.
+             A better way for a multi-module setup is a parent POM.
+             For simplicity here, I'll add a placeholder for where it *would* go.
+        -->
+        <!--
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>shared-util</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>system</scope> <!- - This is not ideal, but for local compilation against a local jar -->
+            <!-- <systemPath>${project.basedir}/../shared-util/target/shared-util-1.0-SNAPSHOT.jar</systemPath> -->
+        <!--</dependency> -->
+
+    </dependencies>
+
+    <build>
+        <finalName>my-web-app</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <failOnMissingWebXml>${failOnMissingWebXml}</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
