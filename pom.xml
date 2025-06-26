@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -6,24 +7,26 @@
     <groupId>com.example</groupId>
     <artifactId>sonarqube-S3032-test</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>jar</packaging> <!-- 打包类型为jar，这是一个普通的Java应用，非Web应用 -->
 
-    <name>SonarQube S3032 Test Case</name>
+    <name>SonarQube S3032 Test Case</name> <!-- 项目名称，表明这是一个SonarQube S3032规则的测试用例 -->
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <junit.jupiter.version>5.8.2</junit.jupiter.version> <!-- Ensure this version is appropriate -->
+        <junit.jupiter.version>5.8.2</junit.jupiter.version> <!-- JUnit Jupiter版本，用于单元测试 -->
     </properties>
 
     <dependencies>
+        <!-- JUnit Jupiter API 依赖，测试范围 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>${junit.jupiter.version}</version>
             <scope>test</scope>
         </dependency>
+        <!-- JUnit Jupiter Engine 依赖，测试范围 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -34,19 +37,21 @@
 
     <build>
         <plugins>
+            <!-- Maven 编译插件配置 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version> <!-- Consider using a more recent version if compatible -->
+                <version>3.8.1</version> <!-- 编译器插件版本 -->
                 <configuration>
                     <source>${maven.compiler.source}</source>
                     <target>${maven.compiler.target}</target>
                 </configuration>
             </plugin>
+            <!-- Maven Surefire 插件配置，用于运行单元测试 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version> <!-- Ensure this version works with JUnit 5 -->
+                <version>2.22.2</version> <!-- Surefire插件版本 -->
             </plugin>
         </plugins>
     </build>

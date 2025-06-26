@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -6,7 +7,7 @@
     <groupId>com.example</groupId>
     <artifactId>my-web-app</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>war</packaging> <!-- 打包类型为war，用于Web应用 -->
 
     <name>My WebApp for ClassLoader Demo</name>
 
@@ -14,11 +15,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <failOnMissingWebXml>false</failOnMissingWebXml> <!-- Handles modern servlet spec without web.xml if not strictly needed -->
+        <!-- 如果web.xml不存在，是否构建失败。这里设置为false以支持现代Servlet规范（Servlet 3.0+）中可选的web.xml -->
+        <failOnMissingWebXml>false</failOnMissingWebXml>
     </properties>
 
     <dependencies>
-        <!-- Servlet API: scope provided because the server (Tomcat) will provide this -->
+        <!-- Servlet API 依赖：scope为provided，表示该依赖由Servlet容器（如Tomcat）提供，无需打包到WAR中 -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -26,38 +28,24 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Dependency on the shared-util project.
-             In a real multi-module Maven project, this would be:
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>shared-util</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-             However, for this conceptual example, we assume shared-util.jar
-             will be manually placed in Tomcat's lib.
-             So, this dependency is more for compilation if SharedUtil was in the same project
-             or a local repository. For the described Tomcat scenario (shared-util in tomcat/lib),
-             this compile-time dependency isn't strictly what makes it work at runtime,
-             but it's needed for `javac` to find `com.example.common.SharedUtil`.
-             Let's assume for now `SharedUtil.java` is also copied into this project's source
-             or manually compiled and made available for `my-web-app` to compile against it.
-             A better way for a multi-module setup is a parent POM.
-             For simplicity here, I'll add a placeholder for where it *would* go.
+        <!-- external-lib 依赖：
+             这个库包含了用于演示类加载器差异的ExternalClass。
+             由于它会被手动放置到Tomcat的lib目录下（由Tomcat的父级类加载器加载），
+             所以这里设置为provided，表示编译时需要，运行时由容器提供。
         -->
-        <!--
         <dependency>
             <groupId>com.example</groupId>
-            <artifactId>shared-util</artifactId>
+            <artifactId>external-lib</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>system</scope> <!- - This is not ideal, but for local compilation against a local jar -->
-            <!-- <systemPath>${project.basedir}/../shared-util/target/shared-util-1.0-SNAPSHOT.jar</systemPath> -->
-        <!--</dependency> -->
+            <scope>provided</scope>
+        </dependency>
 
     </dependencies>
 
     <build>
-        <finalName>my-web-app</finalName>
+        <finalName>my-web-app</finalName> <!-- 打包后的WAR文件名称 -->
         <plugins>
+            <!-- Maven 编译插件配置 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -67,6 +55,7 @@
                     <target>${maven.compiler.target}</target>
                 </configuration>
             </plugin>
+            <!-- Maven WAR 打包插件配置 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
