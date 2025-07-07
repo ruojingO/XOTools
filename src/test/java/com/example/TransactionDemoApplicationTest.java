@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-public class AppTest {
+public class TransactionDemoApplicationTest {
 
     @Autowired
     private NoTransactionUserService noTransactionUserService;

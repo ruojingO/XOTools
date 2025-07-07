@@ -1,1 +1,1 @@
-refactor: Rename classes and optimize string literals for clarity
+refactor: Rename test files, update CHANGELOG and simplify README

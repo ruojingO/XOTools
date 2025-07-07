@@ -1,5 +1,25 @@
 # 更改日志
 
+## [1.1.0] - 2025-07-07
+
+### 新增
+- 为所有 `*ServiceImpl` 类实现了 AOP 事务自动启用功能。
+- 添加了 `ProductService` 和 `ProductServiceImpl` 用于 AOP 事务测试。
+- 添加了 `ProductServiceTestInvoker` 辅助类，用于解决 AOP 自我调用问题，确保测试的正确性。
+- 添加了 `ProductTransactionIntegrationTest` 集成测试，验证 AOP 事务回滚功能。
+
+### 更改
+- 重命名了核心类和测试类，使其名称更具描述性和友好性：
+  - `App.java` -> `TransactionDemoApplication.java`
+  - `UserServiceWithoutTx.java` -> `NoTransactionUserService.java`
+  - `UserServiceWithTx.java` -> `TransactionalUserService.java`
+  - `TransactionAopConfig.java` -> `AopTransactionConfig.java`
+  - `ProductServiceImplTest.java` -> `ProductTransactionIntegrationTest.java`
+  - `ProductTestHelperImpl.java` -> `ProductServiceTestInvoker.java`
+  - `AppTest.java` -> `TransactionDemoApplicationTest.java`
+- 优化了代码中的字符串字面量，使其更生动、更易于理解。
+- 清理了 `pom.xml` 中重复的 `h2database` 依赖。
+
 ## [1.0.0] - 2025-07-07
 
 ### 新增
