@@ -1,6 +1,12 @@
-need use chinese reply
+## always pls obey: 
+
+- need use chinese reply, 
+
+- target/ ,.idea/ etc pls always add to .gitignore
 
 
+
+## this is current requirement : 
 
 pls base now branch create a new branch: testTranscation
 
