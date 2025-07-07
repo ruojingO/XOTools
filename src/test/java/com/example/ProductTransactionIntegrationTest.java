@@ -10,24 +10,27 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @Sql("/test-product.sql")
-class ProductServiceImplTest {
+class ProductTransactionIntegrationTest {
 
     @Autowired
-    private ProductTestHelperImpl productTestHelper;
+    private ProductServiceTestInvoker productTestInvoker;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Test
     void updateProductNameWithTx() {
-        // This call will be wrapped in its own transaction by our AOP configuration.
-        productTestHelper.testUpdate();
+        String initialName = jdbcTemplate.queryForObject("SELECT name FROM product WHERE id = ?", String.class, 1L);
+        System.out.println("Initial product name in test: " + initialName);
+
+        assertThrows(RuntimeException.class, () -> productTestInvoker.testUpdate());
 
         // Now, we verify that the transaction was rolled back.
         String name = jdbcTemplate.queryForObject("SELECT name FROM product WHERE id = ?", String.class, 1L);
-        assertEquals("OriginalName", name, "The name should have been rolled back to OriginalName");
+        assertEquals("InitialProductName", name, "The name should have been rolled back to InitialProductName");
     }
 }

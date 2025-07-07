@@ -13,10 +13,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class AppTest {
 
     @Autowired
-    private UserServiceWithoutTx userServiceWithoutTx;
+    private NoTransactionUserService noTransactionUserService;
 
     @Autowired
-    private UserServiceWithTx userServiceWithTx;
+    private TransactionalUserService transactionalUserService;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -33,7 +33,7 @@ public class AppTest {
         assertEquals("OriginalName", jdbcTemplate.queryForObject("SELECT name FROM app_user WHERE id = 1", String.class));
 
         // 执行无事务更新，预期抛出异常
-        assertThrows(RuntimeException.class, () -> userServiceWithoutTx.updateNameWithoutTx(1L, "UpdatedNameWithoutTx"));
+        assertThrows(RuntimeException.class, () -> noTransactionUserService.updateNameWithoutTx(1L, "UpdatedNameWithoutTx"));
 
         // 检查数据：无事务，数据应该已经更新
         assertEquals("UpdatedNameWithoutTx", jdbcTemplate.queryForObject("SELECT name FROM app_user WHERE id = 1", String.class));
@@ -45,7 +45,7 @@ public class AppTest {
         assertEquals("OriginalName", jdbcTemplate.queryForObject("SELECT name FROM app_user WHERE id = 1", String.class));
 
         // 执行有事务更新，预期抛出异常
-        assertThrows(RuntimeException.class, () -> userServiceWithTx.updateNameWithTx(1L, "UpdatedNameWithTx"));
+        assertThrows(RuntimeException.class, () -> transactionalUserService.updateNameWithTx(1L, "UpdatedNameWithTx"));
 
         // 检查数据：有事务，数据应该回滚到原始状态
         assertEquals("OriginalName", jdbcTemplate.queryForObject("SELECT name FROM app_user WHERE id = 1", String.class));

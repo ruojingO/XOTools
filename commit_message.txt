@@ -1,1 +1,1 @@
-feat: Implement AOP transaction for *ServiceImpl and add tests
+refactor: Rename classes and optimize string literals for clarity

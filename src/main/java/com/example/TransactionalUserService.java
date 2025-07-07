@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional  // 默认 readOnly=false, PROPAGATION_REQUIRED
-public class UserServiceWithTx {
+public class TransactionalUserService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 

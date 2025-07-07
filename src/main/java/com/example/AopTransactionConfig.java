@@ -14,7 +14,7 @@ import java.util.Properties;
 
 @Aspect
 @Configuration
-public class TransactionAopConfig {
+public class AopTransactionConfig {
 
     @Autowired
     private PlatformTransactionManager transactionManager;
@@ -36,7 +36,7 @@ public class TransactionAopConfig {
     @Bean
     public Advisor txAdvisor() {
         AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
-        pointcut.setExpression("execution(* com.example.*ServiceImpl.*(..))");
+        pointcut.setExpression("execution(* com.example.*ServiceImpl.*(..)) || execution(* com.example.*TestInvoker.*(..))");
         return new DefaultPointcutAdvisor(pointcut, txAdvice());
     }
 }
