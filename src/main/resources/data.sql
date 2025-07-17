@@ -1,2 +1,0 @@
-INSERT INTO app_user (id, name) VALUES (1, 'InitialUserName');
-INSERT INTO product (id, name) VALUES (1, 'InitialProductName');
