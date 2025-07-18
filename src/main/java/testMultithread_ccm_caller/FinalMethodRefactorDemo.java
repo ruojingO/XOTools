@@ -17,7 +17,9 @@ public class FinalMethodRefactorDemo {
         
         // --- 1. 不安全的方法 (UNSAFE Method) ---
         /**
-         * 您最初的方法。它返回一个局部 map，将并发合并的风险完全留给了调用者。
+		  * 这是您最初的、未修改的方法。它本身没有并发问题，
+         * 但它返回的结果在并发的“上层调用”中使用是“危险的”。
+         * 它返回一个局部 map，将并发合并的风险完全留给了调用者。
          */
         public Map<String, List<String>> getTLevelTableAndFilterModes_UNSAFE(List<String> tableCodes) {
             Map<String, List<String>> tTableParams = new ConcurrentHashMap<>();
