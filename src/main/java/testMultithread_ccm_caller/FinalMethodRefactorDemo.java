@@ -118,7 +118,7 @@ public class FinalMethodRefactorDemo {
         System.out.println("【不安全方法的结果】实际大小为: " + (unsafeList != null ? unsafeList.size() : 0) + "  <--- ❌ 失败！调用者很容易就写出了错误的代码。");
 
 
-        System.out.println("\n" + "=".repeat(80) + "\n");
+       // System.out.println("\n" + "=".repeat(80) + "\n");
         
 
         // =================================================================================

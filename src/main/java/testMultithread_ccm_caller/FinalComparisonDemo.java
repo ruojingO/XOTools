@@ -81,7 +81,7 @@ public class FinalComparisonDemo {
         System.out.println("【不安全结果】实际 'T_USERS' 的大小为: " + (unsafeList != null ? unsafeList.size() : 0) + "  <--- ❌ 数据已损坏！");
 
 
-        System.out.println("\n" + "=".repeat(80) + "\n");
+      //  System.out.println("\n" + "=".repeat(80) + "\n");
         
 
         // =================================================================================
