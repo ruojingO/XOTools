@@ -1,0 +1,1 @@
+This package contains a simple demonstration of Bouncy Castle compatibility with JDK 8+.
